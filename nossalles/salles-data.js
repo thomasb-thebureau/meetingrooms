@@ -196,7 +196,9 @@
     capacity:{fr:'Capacité',en:'Capacity'},
     price:{fr:'Tarifs',en:'Rates'},
     presta:{fr:'Prestations',en:'Services'},
-    usageLabel:{fr:'Usage',en:'Use'}
+    usageLabel:{fr:'Usage',en:'Use'},
+    readMore:{fr:'Lire la suite',en:'Read more'},
+    readLess:{fr:'Lire moins',en:'Read less'}
   };
 
   function capText(r, lang){
@@ -314,7 +316,10 @@
       '<div class="idx-info">'+
         '<span class="eyelet" id="idxWhere">'+ROOMS[0].where[lang]+'</span>'+
         '<div class="idx-info__name" id="idxName">'+ROOMS[0].name+'</div>'+
-        '<div class="idx-info__desc" id="idxDesc">'+leadHTML(ROOMS[0],lang)+'</div>'+
+        '<div class="idx-info__desc is-collapsed" id="idxDesc">'+descHTML(ROOMS[0],lang)+'</div>'+
+        '<button class="idx-more" id="idxMore" type="button" aria-expanded="false">'+
+          '<span class="idx-more__lbl" data-more="'+T.readMore[lang]+'" data-less="'+T.readLess[lang]+'">'+T.readMore[lang]+'</span>'+
+        '</button>'+
         '<div class="equip idx-info__equip" id="idxEquip">'+equipHTML(ROOMS[0],lang)+'</div>'+
         '<div class="idx-meta" id="idxMeta">'+metaHTML(ROOMS[0],lang)+'</div>'+
         '<a class="btn-ink" id="idxCta" href="'+quoteLink(ROOMS[0],lang)+'">'+T.quote[lang]+' →</a>'+
@@ -324,6 +329,15 @@
     mount.innerHTML = list + detail;
 
     var items = mount.querySelectorAll('.idx-item');
+    var descEl = mount.querySelector('#idxDesc');
+    var moreBtn = mount.querySelector('#idxMore');
+    var moreLbl = moreBtn.querySelector('.idx-more__lbl');
+    function setOpen(open){
+      descEl.classList.toggle('is-collapsed', !open);
+      moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      moreLbl.textContent = open ? moreLbl.getAttribute('data-less') : moreLbl.getAttribute('data-more');
+    }
+    moreBtn.addEventListener('click', function(){ setOpen(descEl.classList.contains('is-collapsed')); });
     function select(idx){
       var r = ROOMS[idx];
       items.forEach(function(el){ el.classList.toggle('is-active', +el.dataset.i===idx); });
@@ -331,7 +345,8 @@
       mount.querySelector('#idxTag').textContent = r.tag[lang];
       mount.querySelector('#idxWhere').textContent = r.where[lang];
       mount.querySelector('#idxName').textContent = r.name;
-      mount.querySelector('#idxDesc').innerHTML = leadHTML(r,lang);
+      descEl.innerHTML = descHTML(r,lang);
+      setOpen(false); /* nouvelle salle → on replie */
       mount.querySelector('#idxEquip').innerHTML = equipHTML(r,lang);
       mount.querySelector('#idxMeta').innerHTML = metaHTML(r,lang);
       mount.querySelector('#idxCta').setAttribute('href', quoteLink(r,lang));
