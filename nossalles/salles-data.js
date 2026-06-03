@@ -23,7 +23,7 @@
     paperboard:'<rect x="5" y="6.5" width="14" height="10" rx="0.5"/><path d="M12 3v3.5M6.5 21l2.2-4.5M17.5 21l-2.2-4.5"/>',
     patio:'<path d="M12 2.5a6 6 0 0 0 0 12 6 6 0 0 0 0-12zM12 14.5V21M8 21h8"/><path d="M6.5 8.5H4M20 8.5h-2.5"/>'
   };
-  function icon(n){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[n]||'')+'</svg>'; }
+  function icon(n){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+(ICONS[n]||'')+'</svg>'; }
 
   var EQUIP = {
     ecran:{fr:'Écran',en:'Screen'}, visio:{fr:'Visio',en:'Video'},
@@ -388,7 +388,7 @@
     var b = buildingOf(r);
     var price = r.price ? r.price[lang] : (lang==='fr'?'Sur demande':'On request');
     return '<span class="eyelet">The Bureau '+b.num+' · '+b.name[lang]+'</span>'+
-      '<div class="viz__name">'+r.name+'</div>'+
+      '<h2 class="viz__name">'+r.name+'</h2>'+
       '<p class="viz__desc">'+r.desc[lang].join(' ')+'</p>'+
       '<div class="equip viz__equip">'+equipHTML(r,lang)+'</div>'+
       '<dl class="viz__spec">'+
@@ -400,7 +400,7 @@
       '<a class="viz__cta" href="'+quoteLink(r,lang)+'">'+T.quote[lang]+' →</a>';
   }
 
-  var VIZ = { pos:0, topA:true, timer:null, paused:false, reduce:false, bound:false, show:null, pause:null, resume:null };
+  var VIZ = { pos:0, topA:true, timer:null, paused:false, userPaused:false, reduce:false, bound:false, show:null, pause:null, resume:null };
   function vizKey(e){
     if(!VIZ.show) return;
     var t=e.target; if(t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
@@ -433,8 +433,9 @@
       '<div class="viz__prog"><i id="vizProg"></i></div>'+
       '<span class="tag viz__tag" id="vizTag"></span>'+
       '<div class="viz__counter" id="vizCount"></div>'+
-      '<div class="viz__info" id="vizInfo"></div>'+
+      '<div class="viz__info" id="vizInfo" aria-live="polite"></div>'+
       '<div class="viz__nav">'+
+        '<button class="viz__arrow viz__pp" id="vizPlay" type="button" aria-pressed="false" aria-label="'+(lang==='fr'?'Mettre le défilement en pause':'Pause auto-advance')+'"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="6" width="3.4" height="12"/><rect x="13.6" y="6" width="3.4" height="12"/></svg></button>'+
         '<button class="viz__arrow" id="vizPrev" type="button" aria-label="'+(lang==='fr'?'Salle précédente':'Previous room')+'">‹</button>'+
         '<button class="viz__arrow" id="vizNext" type="button" aria-label="'+(lang==='fr'?'Salle suivante':'Next room')+'">›</button>'+
       '</div>'+
@@ -474,14 +475,34 @@
       startProg();
       schedule();
     }
+    var playBtn = mount.querySelector('#vizPlay');
+    var ICON_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="6" width="3.4" height="12"/><rect x="13.6" y="6" width="3.4" height="12"/></svg>';
+    var ICON_PLAY  = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5l11 7-11 7z"/></svg>';
+    function reflectPlay(){
+      var stopped = VIZ.userPaused || VIZ.reduce;
+      playBtn.innerHTML = stopped ? ICON_PLAY : ICON_PAUSE;
+      playBtn.setAttribute('aria-pressed', stopped ? 'true' : 'false');
+      playBtn.setAttribute('aria-label', stopped
+        ? (lang==='fr'?'Reprendre le défilement':'Resume auto-advance')
+        : (lang==='fr'?'Mettre le défilement en pause':'Pause auto-advance'));
+    }
     function pause(){ VIZ.paused=true; stage.classList.add('is-paused'); if(VIZ.timer){ clearTimeout(VIZ.timer); VIZ.timer=null; } }
-    function resume(){ VIZ.paused=false; stage.classList.remove('is-paused'); startProg(); schedule(); }
+    function resume(){ if(VIZ.userPaused) return; VIZ.paused=false; stage.classList.remove('is-paused'); startProg(); schedule(); }
 
     mount.querySelector('#vizPrev').addEventListener('click', function(){ show(VIZ.pos-1, true); });
     mount.querySelector('#vizNext').addEventListener('click', function(){ show(VIZ.pos+1, true); });
     thumbs.forEach(function(t){ t.addEventListener('click', function(){ show(+t.dataset.pos, true); }); });
+    /* contrôle explicite (WCAG 2.2.2) */
+    playBtn.addEventListener('click', function(){
+      if(VIZ.userPaused){ VIZ.userPaused=false; resume(); } else { VIZ.userPaused=true; pause(); }
+      reflectPlay();
+    });
     stage.addEventListener('mouseenter', pause);
     stage.addEventListener('mouseleave', resume);
+    /* clavier : se focaliser dans la scène met en pause (jamais de mouvement non maîtrisé) */
+    stage.addEventListener('focusin', pause);
+    stage.addEventListener('focusout', function(e){ if(!stage.contains(e.relatedTarget)) resume(); });
+    reflectPlay();
 
     VIZ.show = show; VIZ.pause = pause; VIZ.resume = resume;
     if(!VIZ.bound){ VIZ.bound = true; document.addEventListener('keydown', vizKey); document.addEventListener('visibilitychange', vizVis); }
@@ -565,9 +586,12 @@
 
   function setLang(lang){
     document.body.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang); /* WCAG 3.1.1/3.1.2 */
     try{ localStorage.setItem('tb-salles-lang', lang); }catch(e){}
     document.querySelectorAll('.nav__lang button').forEach(function(b){
-      b.classList.toggle('is-active', b.dataset.lang===lang);
+      var on = b.dataset.lang===lang;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     renderRooms(lang);
     renderForm(lang);

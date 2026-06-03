@@ -9,9 +9,11 @@
 </head>
 <body data-lang="fr">
 
+  <a class="skip-link" href="#salles"><span lang="fr">Aller aux salles</span><span lang="en">Skip to the rooms</span></a>
+
   <!-- ============ NAV ============ -->
-  <nav class="nav">
-    <a class="nav__logo" href="#" aria-label="The Bureau"><img src="assets/logo-light.svg" alt="The Bureau"></a>
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="nav__logo" href="#" aria-label="The Bureau · accueil"><img src="assets/logo-light.svg" alt="The Bureau"></a>
     <div class="nav__links">
       <a class="nav__link" href="#salles"><span lang="fr">Nos salles</span><span lang="en">Our rooms</span></a>
       <a class="nav__link" href="#lieu"><span lang="fr">Le lieu</span><span lang="en">The setting</span></a>
@@ -19,7 +21,7 @@
       <a class="nav__link" href="#guide"><span lang="fr">Bien choisir</span><span lang="en">Choosing</span></a>
       <a class="nav__link" href="#contact"><span lang="fr">Contact</span><span lang="en">Contact</span></a>
       <span class="nav__sep"></span>
-      <span class="nav__lang"><button data-lang="fr">FR</button><button data-lang="en">EN</button></span>
+      <span class="nav__lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-label="English" aria-pressed="false">EN</button></span>
     </div>
     <a class="nav__cta" href="#contact"><span lang="fr">Demander un devis</span><span lang="en">Request a quote</span></a>
   </nav>

@@ -42,7 +42,7 @@
 .viz__info{ position:absolute; left:clamp(20px,5vw,72px); top:0; bottom:clamp(152px,18vh,186px);
   width:min(560px,54vw); z-index:4; display:flex; flex-direction:column; justify-content:flex-end; color:var(--ivory); }
 .viz__info .eyelet{ color:var(--gold-lt); margin-bottom:10px; }
-.viz__name{ font-family:var(--font-display); font-weight:800; font-size:clamp(26px,3.3vw,46px);
+.viz__name{ margin:0; font-family:var(--font-display); font-weight:800; font-size:clamp(26px,3.3vw,46px);
   line-height:1.02; letter-spacing:-0.025em; color:var(--gold-lt); white-space:nowrap; }
 .viz__desc{ font-family:var(--font-display); font-weight:300; font-size:clamp(14px,1.15vw,16.5px);
   line-height:1.6; color:rgba(245,239,229,.9); margin-top:14px;
@@ -80,6 +80,8 @@
   cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s, border-color .2s; }
 .viz__arrow:hover{ background:var(--slate); border-color:var(--gold-lt); }
 .viz__arrow:focus-visible{ outline:2px solid var(--gold-lt); outline-offset:3px; }
+.viz__pp svg{ width:16px; height:16px; fill:var(--ivory); }
+.viz__pp:hover svg{ fill:var(--gold-lt); }
 
 /* ---- Filmstrip (menu en pied, 4 bâtiments) ------------------------- */
 .strip{ position:absolute; left:0; right:0; bottom:0; z-index:5; display:grid; grid-template-columns:repeat(4,1fr);
