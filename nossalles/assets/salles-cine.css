@@ -17,7 +17,8 @@
 .scrim{ position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
     linear-gradient(95deg, rgba(8,14,11,.82) 0%, rgba(8,14,11,.45) 38%, rgba(8,14,11,0) 70%),
-    linear-gradient(0deg, rgba(8,14,11,.88) 0%, rgba(8,14,11,.25) 30%, rgba(8,14,11,0) 56%); }
+    linear-gradient(0deg, rgba(8,14,11,.88) 0%, rgba(8,14,11,.25) 30%, rgba(8,14,11,0) 56%),
+    linear-gradient(180deg, rgba(8,14,11,.45) 0%, rgba(8,14,11,0) 16%); }
 
 /* ---- Barre de progression ------------------------------------------ */
 .viz__prog{ position:absolute; top:66px; left:0; right:0; height:3px; z-index:6; background:rgba(245,239,229,.16); }
@@ -31,9 +32,11 @@
 /* ---- Tag + compteur ------------------------------------------------ */
 .viz__tag{ position:absolute; top:82px; left:clamp(20px,5vw,72px); z-index:5;
   background:var(--slate); color:var(--gold-lt); border:0; }
-.viz__counter{ position:absolute; top:80px; right:clamp(20px,5vw,72px); z-index:5;
-  font-family:var(--font-serif); color:var(--gold-lt); font-size:clamp(28px,3vw,46px); line-height:1; }
-.viz__counter span{ font-size:.4em; color:rgba(245,239,229,.6); margin-left:3px; }
+.viz__counter{ position:absolute; top:76px; right:clamp(20px,5vw,72px); z-index:5;
+  font-family:var(--font-serif); color:var(--gold-lt); font-size:clamp(28px,3vw,46px); line-height:1;
+  padding:4px 13px; background:rgba(8,14,11,.42); backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px); text-shadow:0 1px 10px rgba(0,0,0,.5); }
+.viz__counter span{ font-size:.4em; color:rgba(245,239,229,.7); margin-left:3px; }
 
 /* ---- Bloc d'information (bas-gauche) ------------------------------- */
 .viz__info{ position:absolute; left:clamp(20px,5vw,72px); top:0; bottom:clamp(152px,18vh,186px);
