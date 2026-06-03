@@ -216,6 +216,10 @@
   function descHTML(r, lang){
     return r.desc[lang].map(function(p){ return '<p>'+p+'</p>'; }).join('');
   }
+  /* version courte pour l'index : 1er paragraphe (vue d'ensemble sans défilement) */
+  function leadHTML(r, lang){
+    return '<p>'+r.desc[lang][0]+'</p>';
+  }
   function num2(i){ return (i+1<10?'0':'')+(i+1); }
   function quoteLink(r, lang){
     return 'mailto:contact@thebureau.paris?subject='+encodeURIComponent((lang==='fr'?'Documentation — ':'Brochure — ')+r.name+' ('+r.address+')');
@@ -310,7 +314,7 @@
       '<div class="idx-info">'+
         '<span class="eyelet" id="idxWhere">'+ROOMS[0].where[lang]+'</span>'+
         '<div class="idx-info__name" id="idxName">'+ROOMS[0].name+'</div>'+
-        '<div class="idx-info__desc" id="idxDesc">'+descHTML(ROOMS[0],lang)+'</div>'+
+        '<div class="idx-info__desc" id="idxDesc">'+leadHTML(ROOMS[0],lang)+'</div>'+
         '<div class="equip idx-info__equip" id="idxEquip">'+equipHTML(ROOMS[0],lang)+'</div>'+
         '<div class="idx-meta" id="idxMeta">'+metaHTML(ROOMS[0],lang)+'</div>'+
         '<a class="btn-ink" id="idxCta" href="'+quoteLink(ROOMS[0],lang)+'">'+T.quote[lang]+' →</a>'+
@@ -327,7 +331,7 @@
       mount.querySelector('#idxTag').textContent = r.tag[lang];
       mount.querySelector('#idxWhere').textContent = r.where[lang];
       mount.querySelector('#idxName').textContent = r.name;
-      mount.querySelector('#idxDesc').innerHTML = descHTML(r,lang);
+      mount.querySelector('#idxDesc').innerHTML = leadHTML(r,lang);
       mount.querySelector('#idxEquip').innerHTML = equipHTML(r,lang);
       mount.querySelector('#idxMeta').innerHTML = metaHTML(r,lang);
       mount.querySelector('#idxCta').setAttribute('href', quoteLink(r,lang));
