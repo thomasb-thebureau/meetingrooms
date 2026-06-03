@@ -2,6 +2,10 @@
 .claude/
 *.log
 
+# Scratch / extraction
+docx_media/
+design_extract/
+
 # OS
 .DS_Store
 Thumbs.db

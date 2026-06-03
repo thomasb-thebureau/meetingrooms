@@ -24,24 +24,36 @@
 
   <!-- ============ HERO ============ -->
   <header class="hero">
-    <div class="hero__eyelet eyelet"><span lang="fr">Salles &amp; Espaces · Paris</span><span lang="en">Rooms &amp; Spaces · Paris</span></div>
-    <h1>
-      <span class="light" lang="fr">Des salles</span><span class="light" lang="en">Rooms that</span>
-      <span class="bold" lang="fr">à la hauteur.</span><span class="bold" lang="en">rise to it.</span>
-    </h1>
-    <p class="hero__lede">
-      <span lang="fr">«&nbsp;Pierre haussmannienne. Lumière naturelle. Bord de Seine.&nbsp;» Huit salles et espaces, sur quatre adresses, entre le 8ᵉ et le 2ᵉ arrondissement, pour réunir, présenter et recevoir.</span>
-      <span lang="en">«&nbsp;Haussmannian stone. Natural light. By the Seine.&nbsp;» Eight rooms and spaces, across four addresses, between the 8th and 2nd arrondissements, to meet, present and host.</span>
-    </p>
-    <div class="hero__meta">
-      <span class="stat">8<small><span lang="fr">salles &amp; espaces</span><span lang="en">rooms &amp; spaces</span></small></span>
-      <span class="stat">4<small><span lang="fr">adresses · Paris VIII &amp; II</span><span lang="en">addresses · Paris 8 &amp; 2</span></small></span>
-      <span class="stat">8&ndash;30<small><span lang="fr">personnes par salle</span><span lang="en">guests per room</span></small></span>
+    <div class="hero__inner">
+      <div class="hero__eyelet eyelet eyelet--light"><span lang="fr">Salles &amp; Espaces · Paris</span><span lang="en">Rooms &amp; Spaces · Paris</span></div>
+      <h1>
+        <span class="light" lang="fr">Des salles</span><span class="light" lang="en">Rooms that</span>
+        <span class="bold" lang="fr">à la hauteur.</span><span class="bold" lang="en">rise to it.</span>
+      </h1>
+      <p class="hero__lede">
+        <span lang="fr">«&nbsp;Pierre haussmannienne. Lumière naturelle. Bord de Seine.&nbsp;» Huit salles et espaces, sur quatre adresses, entre le 8ᵉ et le 2ᵉ arrondissement, pour réunir, présenter et recevoir.</span>
+        <span lang="en">«&nbsp;Haussmannian stone. Natural light. By the Seine.&nbsp;» Eight rooms and spaces, across four addresses, between the 8th and 2nd arrondissements, to meet, present and host.</span>
+      </p>
+      <div class="hero__meta">
+        <span class="stat">8<small><span lang="fr">salles &amp; espaces</span><span lang="en">rooms &amp; spaces</span></small></span>
+        <span class="stat">4<small><span lang="fr">adresses · Paris VIII &amp; II</span><span lang="en">addresses · Paris 8 &amp; 2</span></small></span>
+        <span class="stat">8&ndash;30<small><span lang="fr">personnes par salle</span><span lang="en">guests per room</span></small></span>
+      </div>
+      <a class="btn-gold hero__cta" href="#salles"><span lang="fr">Découvrir nos salles</span><span lang="en">Discover our rooms</span> →</a>
     </div>
   </header>
 
-  <!-- ============ INTRO ============ -->
-  <section class="prose" id="intro">
+  <!-- ============ ROOMS ============ -->
+  <section class="rooms" id="salles">
+    <div class="rooms__head">
+      <h2 class="rooms__title"><span lang="fr">Nos salles de réunion &amp; espaces.</span><span lang="en">Our meeting rooms &amp; spaces.</span></h2>
+      <span class="rooms__count" id="rooms-count"></span>
+    </div>
+    <div id="rooms-mount" data-layout="index"></div>
+  </section>
+
+  <!-- ============ INTRO (déplacé après les salles) ============ -->
+  <section class="prose prose--rule" id="intro">
     <div class="prose__inner reveal">
       <span class="eyelet"><span lang="fr">Salle de réunion premium à Paris</span><span lang="en">Premium meeting rooms in Paris</span></span>
       <h2 class="prose__title"><span lang="fr">Des salles de réunion élégantes pour vos événements professionnels à Paris</span><span lang="en">Elegant meeting rooms for your professional events in Paris</span></h2>
@@ -52,15 +64,6 @@
         <p><span lang="fr">Que vous souhaitiez réunir un petit comité, recevoir des équipes internationales ou organiser un événement professionnel plus large, The Bureau met à votre disposition des lieux confidentiels, équipés et facilement accessibles.</span><span lang="en">Whether you wish to gather a small committee, welcome international teams or organise a larger professional event, The Bureau provides confidential, well-equipped and easily accessible venues.</span></p>
       </div>
     </div>
-  </section>
-
-  <!-- ============ ROOMS ============ -->
-  <section class="rooms" id="salles">
-    <div class="rooms__head">
-      <h2 class="rooms__title"><span lang="fr">Nos salles de réunion &amp; espaces.</span><span lang="en">Our meeting rooms &amp; spaces.</span></h2>
-      <span class="rooms__count" id="rooms-count"></span>
-    </div>
-    <div id="rooms-mount" data-layout="index"></div>
   </section>
 
   <!-- ============ POURQUOI ============ -->
