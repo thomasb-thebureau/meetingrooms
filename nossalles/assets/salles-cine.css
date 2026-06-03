@@ -1,7 +1,9 @@
 /* =====================================================================
    The Bureau — Nos Salles · visualiseur plein écran (scène + filmstrip)
    ===================================================================== */
-.stage{ position:relative; height:100vh; overflow:hidden; background:#0d1612; }
+/* Hauteur = écran moins le header → scène pleine et collée sous le header */
+.stage{ position:relative; height:calc(100vh - var(--nav-h)); overflow:hidden; background:#0d1612;
+  scroll-snap-align:start; }
 .stage__mount{ position:absolute; inset:0; }
 
 /* ---- Couches photo (crossfade + Ken Burns) ------------------------- */
@@ -17,11 +19,10 @@
 .scrim{ position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
     linear-gradient(95deg, rgba(8,14,11,.82) 0%, rgba(8,14,11,.45) 38%, rgba(8,14,11,0) 70%),
-    linear-gradient(0deg, rgba(8,14,11,.88) 0%, rgba(8,14,11,.25) 30%, rgba(8,14,11,0) 56%),
-    linear-gradient(180deg, rgba(8,14,11,.45) 0%, rgba(8,14,11,0) 16%); }
+    linear-gradient(0deg, rgba(8,14,11,.88) 0%, rgba(8,14,11,.25) 30%, rgba(8,14,11,0) 56%); }
 
 /* ---- Barre de progression ------------------------------------------ */
-.viz__prog{ position:absolute; top:66px; left:0; right:0; height:3px; z-index:6; background:rgba(245,239,229,.16); }
+.viz__prog{ position:absolute; top:0; left:0; right:0; height:3px; z-index:6; background:rgba(245,239,229,.16); }
 .viz__prog i{ display:block; height:100%; width:0; background:var(--gold-lt); }
 @media(prefers-reduced-motion:no-preference){
   .viz__prog i.run{ animation:tb-prog 6500ms linear forwards; }
@@ -30,21 +31,19 @@
 @keyframes tb-prog{ from{width:0} to{width:100%} }
 
 /* ---- Tag + compteur ------------------------------------------------ */
-.viz__tag{ position:absolute; top:82px; left:clamp(20px,5vw,72px); z-index:5;
+.viz__tag{ position:absolute; top:22px; left:clamp(20px,5vw,72px); z-index:5;
   background:var(--slate); color:var(--gold-lt); border:0; }
-.viz__counter{ position:absolute; top:76px; right:clamp(20px,5vw,72px); z-index:5;
+.viz__counter{ position:absolute; top:18px; right:clamp(20px,5vw,72px); z-index:5;
   font-family:var(--font-serif); color:var(--gold-lt); font-size:clamp(28px,3vw,46px); line-height:1;
-  padding:4px 13px; background:rgba(8,14,11,.42); backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px); text-shadow:0 1px 10px rgba(0,0,0,.5); }
-.viz__counter span{ font-size:.4em; color:rgba(245,239,229,.7); margin-left:3px; }
+  text-shadow:0 0 3px rgba(0,0,0,.85), 0 1px 2px rgba(0,0,0,.9), 0 2px 16px rgba(0,0,0,.55); }
+.viz__counter span{ font-size:.4em; color:var(--ivory); margin-left:3px; }
 
 /* ---- Bloc d'information (bas-gauche) ------------------------------- */
 .viz__info{ position:absolute; left:clamp(20px,5vw,72px); top:0; bottom:clamp(152px,18vh,186px);
   width:min(560px,54vw); z-index:4; display:flex; flex-direction:column; justify-content:flex-end; color:var(--ivory); }
 .viz__info .eyelet{ color:var(--gold-lt); margin-bottom:10px; }
-.viz__name{ font-family:var(--font-display); font-weight:800; font-size:clamp(30px,4.2vw,58px);
-  line-height:1; letter-spacing:-0.025em; color:var(--gold-lt);
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.viz__name{ font-family:var(--font-display); font-weight:800; font-size:clamp(26px,3.3vw,46px);
+  line-height:1.02; letter-spacing:-0.025em; color:var(--gold-lt); white-space:nowrap; }
 .viz__desc{ font-family:var(--font-display); font-weight:300; font-size:clamp(14px,1.15vw,16.5px);
   line-height:1.6; color:rgba(245,239,229,.9); margin-top:14px;
   display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }

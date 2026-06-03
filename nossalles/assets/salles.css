@@ -38,10 +38,11 @@
   --pad: clamp(20px, 5vw, 80px);
   --maxw: 1240px;
   --ease: cubic-bezier(0.25,0.1,0.25,1);
+  --nav-h: 77px; /* hauteur réelle du header, ajustée en JS */
 }
 
 *{ box-sizing:border-box; }
-html{ -webkit-text-size-adjust:100%; }
+html{ -webkit-text-size-adjust:100%; scroll-snap-type:y proximity; scroll-padding-top:var(--nav-h); }
 body{
   margin:0; background:var(--white); color:var(--ink);
   font-family:var(--font-body); font-size:16px; line-height:1.6;

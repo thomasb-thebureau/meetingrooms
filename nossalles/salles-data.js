@@ -589,7 +589,15 @@
     document.querySelectorAll('.reveal:not(.is-in)').forEach(function(el){ io.observe(el); });
   }
 
+  /* hauteur réelle du header → --nav-h (scène collée sous le header) */
+  function setNavH(){
+    var nav = document.querySelector('.nav');
+    if(nav) document.documentElement.style.setProperty('--nav-h', Math.round(nav.getBoundingClientRect().height)+'px');
+  }
+
   function boot(){
+    setNavH();
+    window.addEventListener('resize', setNavH, { passive:true });
     var saved = 'fr';
     try{ saved = localStorage.getItem('tb-salles-lang') || 'fr'; }catch(e){}
     document.querySelectorAll('.nav__lang button').forEach(function(b){
