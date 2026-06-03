@@ -201,6 +201,35 @@
     readLess:{fr:'Lire moins',en:'Read less'}
   };
 
+  /* ---------- Formulaire de réservation (mail pré-rempli) ------------ */
+  var FORM = {
+    to:'contact@thebureau.paris',
+    subject:{fr:'Demande de réservation — Salle de réunion · The Bureau',en:'Booking request — Meeting room · The Bureau'},
+    fields:[
+      {name:'date', type:'date', label:{fr:'Date',en:'Date'}},
+      {name:'duree', type:'select', label:{fr:'Durée',en:'Duration'},
+        options:[{fr:'Demi-journée',en:'Half-day'},{fr:'Journée',en:'Full day'},{fr:'Plusieurs jours',en:'Several days'}]},
+      {name:'participants', type:'number', label:{fr:'Participants',en:'Guests'}, ph:{fr:'ex. 10',en:'e.g. 10'}},
+      {name:'arrondissement', type:'select', label:{fr:'Arrondissement',en:'Arrondissement'},
+        options:[{fr:'Indifférent',en:'No preference'},{fr:'Paris 8ᵉ — Alma',en:'Paris 8 — Alma'},{fr:'Paris 2ᵉ — Opéra · Bourse',en:'Paris 2 — Opéra · Bourse'}]},
+      {name:'format', type:'select', label:{fr:'Format',en:'Format'},
+        options:[{fr:'Réunion',en:'Meeting'},{fr:'Conseil / direction',en:'Board'},{fr:'Conférence',en:'Conference'},{fr:'Séminaire / formation',en:'Seminar / training'},{fr:'Événement / cocktail',en:'Event / cocktail'}]},
+      {name:'prestations', type:'select', label:{fr:'Prestations',en:'Services'},
+        options:[{fr:'—',en:'—'},{fr:'Petit-déjeuner',en:'Breakfast'},{fr:'Déjeuner',en:'Lunch'},{fr:'Pauses café',en:'Coffee breaks'},{fr:'Cocktail',en:'Cocktail'},{fr:'Afterwork',en:'Afterwork'}]},
+      {name:'nom', type:'text', label:{fr:'Nom',en:'Name'}, ph:{fr:'Votre nom',en:'Your name'}},
+      {name:'email', type:'email', label:{fr:'Email',en:'Email'}, ph:{fr:'vous@societe.com',en:'you@company.com'}}
+    ],
+    message:{fr:'Précisions',en:'Details'},
+    messagePh:{fr:'Contexte, configuration souhaitée, restauration…',en:'Context, preferred setup, catering…'},
+    gmail:{fr:'Préparer dans Gmail',en:'Open in Gmail'},
+    outlook:{fr:'Préparer dans Outlook',en:'Open in Outlook'},
+    other:{fr:'Autre messagerie',en:'Other mail app'},
+    intro:{fr:'Bonjour,\n\nJe souhaite réserver une salle de réunion chez The Bureau. Voici les détails de ma demande :\n',
+           en:'Hello,\n\nI would like to book a meeting room at The Bureau. Here are the details of my request:\n'},
+    outro:{fr:'\nMerci de me confirmer les disponibilités et de m’adresser un devis.\nBien à vous,',
+           en:'\nPlease confirm availability and send me a quote.\nBest regards,'}
+  };
+
   function capText(r, lang){
     if(r.mode==='venue') return r.usage[lang];
     return T.upto[lang]+' '+r.cap+' '+T.seats[lang];
@@ -360,6 +389,63 @@
 
   var RENDERERS = { galerie:renderGalerie, editorial:renderEditorial, index:renderIndex };
 
+  /* ---------- Formulaire : rendu + génération du mail ---------------- */
+  function renderForm(lang){
+    var form = document.getElementById('rform');
+    if(!form) return;
+    var html = '<div class="rform__grid">';
+    FORM.fields.forEach(function(f){
+      html += '<label class="rfield"><span class="rfield__lbl">'+f.label[lang]+'</span>';
+      if(f.type==='select'){
+        html += '<select class="rfield__in" name="'+f.name+'">'+
+          f.options.map(function(o){ return '<option>'+o[lang]+'</option>'; }).join('')+'</select>';
+      } else {
+        html += '<input class="rfield__in" type="'+f.type+'" name="'+f.name+'"'+
+          (f.ph?' placeholder="'+f.ph[lang]+'"':'')+'>';
+      }
+      html += '</label>';
+    });
+    html += '</div>';
+    html += '<label class="rfield rfield--full"><span class="rfield__lbl">'+FORM.message[lang]+'</span>'+
+      '<textarea class="rfield__in" name="message" rows="2" placeholder="'+FORM.messagePh[lang]+'"></textarea></label>';
+    html += '<div class="rform__actions">'+
+      '<button type="button" class="btn-gold" data-to="gmail">'+FORM.gmail[lang]+' →</button>'+
+      '<button type="button" class="rform__alt" data-to="outlook">'+FORM.outlook[lang]+'</button>'+
+      '<button type="button" class="rform__alt" data-to="mailto">'+FORM.other[lang]+'</button>'+
+    '</div>';
+    form.innerHTML = html;
+
+    function buildBody(){
+      var lines = [];
+      FORM.fields.forEach(function(f){
+        var el = form.querySelector('[name="'+f.name+'"]');
+        var v = el ? (el.value||'').trim() : '';
+        if(v && v!=='—') lines.push(f.label[lang]+' : '+v);
+      });
+      var msgEl = form.querySelector('[name="message"]');
+      var msg = msgEl ? msgEl.value.trim() : '';
+      var body = FORM.intro[lang] + '\n' + lines.join('\n');
+      if(msg) body += '\n\n' + FORM.message[lang] + ' : ' + msg;
+      body += '\n' + FORM.outro[lang];
+      return body;
+    }
+    function compose(target){
+      var subject = FORM.subject[lang], body = buildBody(), to = FORM.to;
+      if(target==='gmail'){
+        window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(to)+
+          '&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body),'_blank','noopener');
+      } else if(target==='outlook'){
+        window.open('https://outlook.office.com/mail/deeplink/compose?to='+encodeURIComponent(to)+
+          '&subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body),'_blank','noopener');
+      } else {
+        window.location.href = 'mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+      }
+    }
+    form.querySelectorAll('.rform__actions button').forEach(function(b){
+      b.addEventListener('click', function(){ compose(b.getAttribute('data-to')); });
+    });
+  }
+
   /* ---------- Boot --------------------------------------------------- */
   function renderRooms(lang){
     var mount = document.getElementById('rooms-mount');
@@ -378,6 +464,7 @@
       b.classList.toggle('is-active', b.dataset.lang===lang);
     });
     renderRooms(lang);
+    renderForm(lang);
   }
 
   var io;
