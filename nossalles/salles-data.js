@@ -46,7 +46,7 @@
   /* ---------- Rooms — contenu réel (descriptions complètes) ---------- */
   var ROOMS = [
     /* ----- Paris 8ᵉ ----- */
-    { id:'board-8e-28', name:'The Board Room', arr:'8e', photo:'photos/board-room-8e-28.png',
+    { id:'board-8e-28', name:'The Board Room', arr:'8e', photo:'photos/board-room-8e-28.webp',
       tag:{fr:'Conseil',en:'Board'},
       address:'28 Cours Albert 1ᵉʳ, 75008 Paris',
       where:{fr:'28 Cours Albert 1ᵉʳ · Paris 8ᵉ',en:'28 Cours Albert 1ᵉʳ · Paris 8'},
@@ -61,7 +61,7 @@
         'Haussmannian stone, daylight, a view over the Seine.',
         'The boardroom, for confidential exchanges and the decisions that matter — at one of The Bureau’s most prestigious addresses.']} },
 
-    { id:'deal-8e-16', name:'The Deal Room', arr:'8e', photo:'photos/deal-room-8e-16.png',
+    { id:'deal-8e-16', name:'The Deal Room', arr:'8e', photo:'photos/deal-room-8e-16.webp',
       tag:{fr:'Réunion',en:'Meeting'},
       address:'16 Cours Albert 1ᵉʳ, 75008 Paris',
       where:{fr:'16 Cours Albert 1ᵉʳ · Paris 8ᵉ',en:'16 Cours Albert 1ᵉʳ · Paris 8'},
@@ -76,7 +76,7 @@
         'An intimate format, by the Seine, facing the Eiffel Tower.',
         'For confidential meetings and strategic check-ins in a small committee — where the setting matters as much as the function.']} },
 
-    { id:'cafe-8e-28', name:'The Café', arr:'8e', photo:'photos/cafe-8e-28.png',
+    { id:'cafe-8e-28', name:'The Café', arr:'8e', photo:'photos/cafe-8e-28.webp',
       tag:{fr:'Restaurant privé',en:'Private restaurant'},
       address:'28 Cours Albert 1ᵉʳ, 75008 Paris',
       where:{fr:'28 Cours Albert 1ᵉʳ · Paris 8ᵉ',en:'28 Cours Albert 1ᵉʳ · Paris 8'},
@@ -91,7 +91,7 @@
         'The private restaurant of 28 Cours Albert 1ᵉʳ.',
         'Lunch, a gourmet break, a cocktail or an evening private hire: the The Bureau spirit extended to the table — convivial and epicurean.']} },
 
-    { id:'conference-8e-28', name:'The Conference Room', arr:'8e', photo:'photos/conference-8e-28.png',
+    { id:'conference-8e-28', name:'The Conference Room', arr:'8e', photo:'photos/conference-8e-28.webp',
       tag:{fr:'Conférence',en:'Conference'},
       address:'28 Cours Albert 1ᵉʳ, 75008 Paris',
       where:{fr:'28 Cours Albert 1ᵉʳ · Paris 8ᵉ',en:'28 Cours Albert 1ᵉʳ · Paris 8'},
@@ -107,7 +107,7 @@
         'Presentations, conferences, training or study days: the volume, the equipment and the services, steps from the Seine.']} },
 
     /* ----- Paris 2ᵉ ----- */
-    { id:'board-2e-42', name:'The Board Room', arr:'2e', photo:'photos/board-room-2e-42.png',
+    { id:'board-2e-42', name:'The Board Room', arr:'2e', photo:'photos/board-room-2e-42.webp',
       tag:{fr:'Conseil',en:'Board'},
       address:'42 rue Notre-Dame des Victoires, 75002 Paris',
       where:{fr:'42 rue N.-D. des Victoires · Paris 2ᵉ',en:'42 rue N.-D. des Victoires · Paris 2'},
@@ -122,7 +122,7 @@
         'Facing the Palais Brongniart, on the ground floor, with direct patio access.',
         'A confidential boardroom in the heart of the 2nd, between Opéra and Bourse.']} },
 
-    { id:'deal-2e-25', name:'The Deal Room', arr:'2e', photo:'photos/deal-room-2e-25.png',
+    { id:'deal-2e-25', name:'The Deal Room', arr:'2e', photo:'photos/deal-room-2e-25.webp',
       tag:{fr:'Réunion',en:'Meeting'},
       address:'25 rue du 4 Septembre, 75002 Paris',
       where:{fr:'25 rue du 4 Septembre · Paris 2ᵉ',en:'25 rue du 4 Septembre · Paris 2'},
@@ -137,7 +137,7 @@
         'Haussmannian décor and natural light, on the second floor.',
         'Three zones — a lounge, a large table, cluster desks — to move between presentation, discussion and small-group work.']} },
 
-    { id:'board-2e-25', name:'The Board Room', arr:'2e', photo:'photos/board-room-2e-25.png',
+    { id:'board-2e-25', name:'The Board Room', arr:'2e', photo:'photos/board-room-2e-25.webp',
       tag:{fr:'Conseil',en:'Board'},
       address:'25 rue du 4 Septembre, 75002 Paris',
       where:{fr:'25 rue du 4 Septembre · Paris 2ᵉ',en:'25 rue du 4 Septembre · Paris 2'},
@@ -152,7 +152,7 @@
         'On the ground floor, at the heart of the Opéra-Bourse district.',
         'A boardroom of considered design, at a lively address that’s easy for your guests to reach.']} },
 
-    { id:'floor-2e-42', name:'Le Floor', arr:'2e', photo:'photos/floor-2e-42.png',
+    { id:'floor-2e-42', name:'Le Floor', arr:'2e', photo:'photos/floor-2e-42.webp',
       tag:{fr:'Coffee shop',en:'Coffee shop'},
       address:'42 rue Notre-Dame des Victoires, 75002 Paris',
       where:{fr:'42 rue N.-D. des Victoires · Paris 2ᵉ',en:'42 rue N.-D. des Victoires · Paris 2'},
@@ -309,7 +309,7 @@
       '</div>';
       ROOMS.forEach(function(r,i){
         if(r.arr!==arr) return;
-        listInner += '<div class="idx-item'+(i===0?' is-active':'')+'" data-i="'+i+'">'+
+        listInner += '<div class="idx-item'+(i===0?' is-active':'')+'" data-i="'+i+'" role="button" tabindex="0" aria-pressed="'+(i===0?'true':'false')+'">'+
           '<span class="idx-num">'+num2(i)+'</span>'+
           '<span class="idx-name">'+r.name+'</span>'+
           '<span class="idx-cap">'+capShort(r,lang)+'</span>'+
@@ -326,7 +326,7 @@
       '<div class="idx-media">'+
         '<span class="tag idx-media__tag" id="idxTag">'+ROOMS[0].tag[lang]+'</span>'+imgs+
       '</div>'+
-      '<div class="idx-info">'+
+      '<div class="idx-info" aria-live="polite">'+
         '<span class="eyelet" id="idxWhere">'+ROOMS[0].where[lang]+'</span>'+
         '<div class="idx-info__name" id="idxName">'+ROOMS[0].name+'</div>'+
         '<div class="idx-info__desc" id="idxDesc">'+descHTML(ROOMS[0],lang)+'</div>'+
@@ -342,7 +342,11 @@
     var descEl = mount.querySelector('#idxDesc');
     function select(idx){
       var r = ROOMS[idx];
-      items.forEach(function(el){ el.classList.toggle('is-active', +el.dataset.i===idx); });
+      items.forEach(function(el){
+        var on = +el.dataset.i===idx;
+        el.classList.toggle('is-active', on);
+        el.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
       mount.querySelectorAll('.idx-media img').forEach(function(im){ im.classList.toggle('is-shown', +im.dataset.i===idx); });
       mount.querySelector('#idxTag').textContent = r.tag[lang];
       mount.querySelector('#idxWhere').textContent = r.where[lang];
@@ -353,10 +357,13 @@
       mount.querySelector('#idxCta').setAttribute('href', quoteLink(r,lang));
       try{ mount.dispatchEvent(new CustomEvent('tb:select',{detail:{idx:idx}})); }catch(e){}
     }
-    /* Sélection au clic uniquement : le panneau de droite reste verrouillé
-       sur la salle choisie — aucun changement au survol. */
+    /* Sélection au clic et au clavier (Entrée/Espace) : le panneau de droite
+       reste verrouillé sur la salle choisie — aucun changement au survol. */
     items.forEach(function(el){
       el.addEventListener('click', function(){ select(+el.dataset.i); });
+      el.addEventListener('keydown', function(e){
+        if(e.key==='Enter' || e.key===' ' || e.key==='Spacebar'){ e.preventDefault(); select(+el.dataset.i); }
+      });
     });
   }
 

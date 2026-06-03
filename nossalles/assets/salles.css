@@ -107,7 +107,7 @@ body[data-lang="en"] [lang="fr"]{ display:none !important; }
 /* ---------- Hero — pleine page, photo + filtre jade ----------------- */
 .hero{ position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;
   padding:clamp(104px,16vh,168px) 0 clamp(56px,9vh,96px);
-  background:#0c1612 url('../photos/hero-room.png') center/cover no-repeat;
+  background:#0c1612 url('../photos/hero-room.webp') center/cover no-repeat;
   background-attachment:scroll; }
 /* filtre jade transparent + dégradé pour la lisibilité du texte */
 .hero::before{ content:""; position:absolute; inset:0; pointer-events:none;
@@ -234,6 +234,7 @@ body[data-lang="en"] [lang="fr"]{ display:none !important; }
   padding:14px 4px; border-bottom:0.5px solid var(--rule); cursor:pointer;
   transition:padding-left .3s var(--ease), color .25s; color:rgba(15,15,15,0.5); }
 .idx-item:hover{ padding-left:14px; color:var(--ink); }
+.idx-item:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; color:var(--ink); }
 .idx-item.is-active{ padding-left:14px; color:var(--ink); }
 .idx-item.is-active::before{ content:""; position:absolute; }
 .idx-num{ font-family:var(--font-body); font-size:14px; color:var(--gold-aa); }
@@ -339,8 +340,8 @@ body[data-lang="en"] [lang="fr"]{ display:none !important; }
 .lieu__head .eyelet{ margin-bottom:14px; }
 .lieu__lead{ font-family:var(--font-body); font-weight:300; font-size:clamp(17px,1.6vw,20px);
   line-height:1.7; color:rgba(15,15,15,0.8); margin-top:18px; }
-.lieu__grid{ margin-top:clamp(34px,4vw,54px); display:grid; grid-template-columns:repeat(4,1fr);
-  gap:clamp(22px,2.6vw,40px); }
+.lieu__grid{ margin-top:clamp(34px,4vw,54px); display:grid; grid-template-columns:repeat(3,1fr);
+  gap:clamp(24px,3vw,48px); }
 .lieu__pt{ position:relative; border-top:1px solid var(--rule); padding-top:20px; }
 .lieu__pt::before{ content:""; position:absolute; top:-1px; left:0; width:28px; height:1px; background:var(--gold); }
 .lieu__pt h3{ font-family:var(--font-display); font-weight:700; font-size:15px; letter-spacing:-0.01em;
