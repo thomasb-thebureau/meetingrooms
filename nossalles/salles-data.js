@@ -345,10 +345,7 @@
       '<div class="idx-info">'+
         '<span class="eyelet" id="idxWhere">'+ROOMS[0].where[lang]+'</span>'+
         '<div class="idx-info__name" id="idxName">'+ROOMS[0].name+'</div>'+
-        '<div class="idx-info__desc is-collapsed" id="idxDesc">'+descHTML(ROOMS[0],lang)+'</div>'+
-        '<button class="idx-more" id="idxMore" type="button" aria-expanded="false">'+
-          '<span class="idx-more__lbl" data-more="'+T.readMore[lang]+'" data-less="'+T.readLess[lang]+'">'+T.readMore[lang]+'</span>'+
-        '</button>'+
+        '<div class="idx-info__desc" id="idxDesc">'+descHTML(ROOMS[0],lang)+'</div>'+
         '<div class="equip idx-info__equip" id="idxEquip">'+equipHTML(ROOMS[0],lang)+'</div>'+
         '<div class="idx-meta" id="idxMeta">'+metaHTML(ROOMS[0],lang)+'</div>'+
         '<a class="btn-ink" id="idxCta" href="'+quoteLink(ROOMS[0],lang)+'">'+T.quote[lang]+' →</a>'+
@@ -359,14 +356,6 @@
 
     var items = mount.querySelectorAll('.idx-item');
     var descEl = mount.querySelector('#idxDesc');
-    var moreBtn = mount.querySelector('#idxMore');
-    var moreLbl = moreBtn.querySelector('.idx-more__lbl');
-    function setOpen(open){
-      descEl.classList.toggle('is-collapsed', !open);
-      moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      moreLbl.textContent = open ? moreLbl.getAttribute('data-less') : moreLbl.getAttribute('data-more');
-    }
-    moreBtn.addEventListener('click', function(){ setOpen(descEl.classList.contains('is-collapsed')); });
     function select(idx){
       var r = ROOMS[idx];
       items.forEach(function(el){ el.classList.toggle('is-active', +el.dataset.i===idx); });
@@ -375,7 +364,6 @@
       mount.querySelector('#idxWhere').textContent = r.where[lang];
       mount.querySelector('#idxName').textContent = r.name;
       descEl.innerHTML = descHTML(r,lang);
-      setOpen(false); /* nouvelle salle → on replie */
       mount.querySelector('#idxEquip').innerHTML = equipHTML(r,lang);
       mount.querySelector('#idxMeta').innerHTML = metaHTML(r,lang);
       mount.querySelector('#idxCta').setAttribute('href', quoteLink(r,lang));
@@ -388,6 +376,12 @@
   }
 
   var RENDERERS = { galerie:renderGalerie, editorial:renderEditorial, index:renderIndex };
+
+  /* ---------- Logos messageries (repère visuel) --------------------- */
+  var MAIL_ICON = {
+    gmail:'<svg class="rform__ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>',
+    outlook:'<svg class="rform__ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0078D4" d="M7.88 12.04q0 .45-.11.87-.1.41-.32.74-.21.33-.53.53-.32.19-.73.19t-.74-.19-.53-.53-.31-.74-.1-.87q0-.46.1-.87.11-.41.31-.74.2-.33.53-.52.32-.19.74-.19t.73.19q.32.19.53.52.22.33.32.74.11.41.11.87zM24 12v9.38q0 .46-.33.8-.33.32-.8.32H7.13q-.46 0-.8-.33-.32-.33-.32-.8V18H1q-.41 0-.7-.3-.3-.29-.3-.7V7q0-.41.3-.7Q.58 6 1 6h6.5V2.55q0-.44.3-.75.3-.3.75-.3h12.9q.44 0 .75.3.3.3.3.75V10.85l1.24.72h.01q.1.07.18.18.07.12.07.25zm-6-8.25v3h3v-3zm0 4.5v3h3v-3zm0 4.5v1.83l3.05-1.83zm-5.25-9v3h3.75v-3zm0 4.5v3h3.75v-3zm0 4.5v2.03l2.41 1.5 1.34-.8v-2.73zM9 3.75V6h2l.13.01.12.04v-2.3zM5.98 15.98q.9 0 1.6-.3.7-.32 1.19-.86.48-.55.73-1.28.25-.74.25-1.6 0-.83-.25-1.55-.24-.71-.71-1.24t-1.15-.83q-.68-.3-1.55-.3-.9 0-1.61.3-.7.3-1.2.85-.48.54-.74 1.27-.25.74-.25 1.61 0 .85.26 1.57.26.73.74 1.26.49.53 1.18.83.69.3 1.51.3zM7.13 17H22.5v-7.43l-7.41 4.5q-.3.18-.66.18-.36 0-.65-.18L7.13 9.57V17z"/></svg>'
+  };
 
   /* ---------- Formulaire : rendu + génération du mail ---------------- */
   function renderForm(lang){
@@ -409,9 +403,8 @@
     html += '<label class="rfield rfield--full"><span class="rfield__lbl">'+FORM.message[lang]+'</span>'+
       '<textarea class="rfield__in" name="message" rows="2" placeholder="'+FORM.messagePh[lang]+'"></textarea></label>';
     html += '<div class="rform__actions">'+
-      '<button type="button" class="btn-gold" data-to="gmail">'+FORM.gmail[lang]+' →</button>'+
-      '<button type="button" class="rform__alt" data-to="outlook">'+FORM.outlook[lang]+'</button>'+
-      '<button type="button" class="rform__alt" data-to="mailto">'+FORM.other[lang]+'</button>'+
+      '<button type="button" class="rform__send" data-to="gmail">'+MAIL_ICON.gmail+'<span>'+FORM.gmail[lang]+'</span></button>'+
+      '<button type="button" class="rform__send" data-to="outlook">'+MAIL_ICON.outlook+'<span>'+FORM.outlook[lang]+'</span></button>'+
     '</div>';
     form.innerHTML = html;
 
@@ -432,12 +425,11 @@
     function compose(target){
       var subject = FORM.subject[lang], body = buildBody(), to = FORM.to;
       if(target==='gmail'){
+        /* Gmail : composition web dans un nouvel onglet */
         window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(to)+
           '&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body),'_blank','noopener');
-      } else if(target==='outlook'){
-        window.open('https://outlook.office.com/mail/deeplink/compose?to='+encodeURIComponent(to)+
-          '&subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body),'_blank','noopener');
       } else {
+        /* Outlook / messagerie locale : mailto ouvre le client par défaut (Outlook installé) */
         window.location.href = 'mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
       }
     }
