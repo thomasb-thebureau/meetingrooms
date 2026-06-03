@@ -55,10 +55,10 @@
       presta:{fr:'Petit-déjeuner, collation, afterwork sur demande · déjeuner au restaurant privé The Café à partir de 33 € HT / pers.',
               en:'Breakfast, refreshments, afterwork on request · lunch at the private restaurant The Café from €33 excl. VAT / guest.'},
       desc:{fr:[
-        'Pierre haussmannienne, lumière du jour, vue sur la Seine.',
+        'Lumière du jour, vue sur la Seine, lignes contemporaines.',
         'La salle du conseil, pour les échanges confidentiels et les décisions qui comptent — dans l’une des adresses les plus prestigieuses de The Bureau.'],
       en:[
-        'Haussmannian stone, daylight, a view over the Seine.',
+        'Daylight, a view over the Seine, contemporary lines.',
         'The boardroom, for confidential exchanges and the decisions that matter — at one of The Bureau’s most prestigious addresses.']} },
 
     { id:'deal-8e-16', name:'The Deal Room', arr:'8e', photo:'photos/deal-room-8e-16.webp',
@@ -167,6 +167,21 @@
         'A coffee shop in the morning, a coffee shop & bakery menu at lunch.',
         'An open, convivial setting to extend a meeting, a break or an event — differently.']} }
   ];
+
+  /* ---------- Bâtiments (pour le visualiseur) ------------------------ */
+  var BUILDINGS = [
+    { num:'I',   name:{fr:'Le Vingt-Huit',en:'Le Vingt-Huit'},  match:'28 Cours Albert' },
+    { num:'II',  name:{fr:'Le Seize',en:'Le Seize'},            match:'16 Cours Albert' },
+    { num:'III', name:{fr:'Le Vingt-Cinq',en:'Le Vingt-Cinq'},  match:'25 rue du 4 Septembre' },
+    { num:'IV',  name:{fr:'Le Quarante-Deux',en:'Le Quarante-Deux'}, match:'42 rue Notre-Dame' }
+  ];
+  function buildingOf(r){
+    for(var i=0;i<BUILDINGS.length;i++){ if(r.address.indexOf(BUILDINGS[i].match)===0) return BUILDINGS[i]; }
+    return BUILDINGS[0];
+  }
+  /* ordre d'affichage : par bâtiment I→IV (= numéros 01–08) */
+  var ORDER = [];
+  BUILDINGS.forEach(function(b){ ROOMS.forEach(function(r,i){ if(buildingOf(r)===b) ORDER.push(i); }); });
 
   /* ---------- i18n strings ------------------------------------------- */
   var T = {
@@ -367,7 +382,114 @@
     });
   }
 
-  var RENDERERS = { galerie:renderGalerie, editorial:renderEditorial, index:renderIndex };
+  /* ---------- Visualiseur cinématique (scène plein écran) ----------- */
+  function vizSpecRow(k,v){ return '<div class="vr"><dt>'+k+'</dt><dd>'+v+'</dd></div>'; }
+  function vizInfoHTML(r, lang){
+    var b = buildingOf(r);
+    var price = r.price ? r.price[lang] : (lang==='fr'?'Sur demande':'On request');
+    return '<span class="eyelet">The Bureau '+b.num+' · '+b.name[lang]+'</span>'+
+      '<div class="viz__name">'+r.name+'</div>'+
+      '<p class="viz__desc">'+r.desc[lang].join(' ')+'</p>'+
+      '<div class="equip viz__equip">'+equipHTML(r,lang)+'</div>'+
+      '<dl class="viz__spec">'+
+        vizSpecRow(T.address[lang], r.address)+
+        vizSpecRow(r.mode==='venue'?T.usageLabel[lang]:T.capacity[lang], capText(r,lang))+
+        vizSpecRow(T.price[lang], price)+
+        vizSpecRow(T.presta[lang], r.presta[lang])+
+      '</dl>'+
+      '<a class="viz__cta" href="'+quoteLink(r,lang)+'">'+T.quote[lang]+' →</a>';
+  }
+
+  var VIZ = { pos:0, topA:true, timer:null, paused:false, reduce:false, bound:false, show:null, pause:null, resume:null };
+  function vizKey(e){
+    if(!VIZ.show) return;
+    var t=e.target; if(t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    if(e.key==='ArrowLeft'){ VIZ.show(VIZ.pos-1,true); }
+    else if(e.key==='ArrowRight'){ VIZ.show(VIZ.pos+1,true); }
+  }
+  function vizVis(){ if(document.hidden){ if(VIZ.pause) VIZ.pause(); } else if(VIZ.resume){ VIZ.resume(); } }
+
+  function renderViz(mount, lang){
+    if(VIZ.timer){ clearTimeout(VIZ.timer); VIZ.timer=null; }
+    VIZ.reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    mount.className = 'stage__mount';
+
+    var strip = BUILDINGS.map(function(b){
+      var thumbs = ORDER.filter(function(ri){ return buildingOf(ROOMS[ri])===b; }).map(function(ri){
+        var disp = ORDER.indexOf(ri), r = ROOMS[ri];
+        return '<button class="th" type="button" data-pos="'+disp+'" aria-label="'+r.name+'">'+
+          '<img src="'+r.photo+'" alt="">'+
+          '<span class="th__n">'+num2(disp)+'</span>'+
+          '<span class="th__cap">'+r.name+'</span>'+
+        '</button>';
+      }).join('');
+      return '<div class="strip-grp"><div class="strip-lbl">The Bureau '+b.num+' <b>'+b.name[lang]+'</b></div>'+
+        '<div class="strip-thumbs">'+thumbs+'</div></div>';
+    }).join('');
+
+    mount.innerHTML =
+      '<div class="bg" id="vbgA"></div><div class="bg" id="vbgB"></div>'+
+      '<div class="scrim"></div>'+
+      '<div class="viz__prog"><i id="vizProg"></i></div>'+
+      '<span class="tag viz__tag" id="vizTag"></span>'+
+      '<div class="viz__counter" id="vizCount"></div>'+
+      '<div class="viz__info" id="vizInfo"></div>'+
+      '<div class="viz__nav">'+
+        '<button class="viz__arrow" id="vizPrev" type="button" aria-label="'+(lang==='fr'?'Salle précédente':'Previous room')+'">‹</button>'+
+        '<button class="viz__arrow" id="vizNext" type="button" aria-label="'+(lang==='fr'?'Salle suivante':'Next room')+'">›</button>'+
+      '</div>'+
+      '<div class="strip">'+strip+'</div>';
+
+    var stage = mount.parentNode;
+    var bgs = [mount.querySelector('#vbgA'), mount.querySelector('#vbgB')];
+    var prog = mount.querySelector('#vizProg');
+    var info = mount.querySelector('#vizInfo');
+    var tagEl = mount.querySelector('#vizTag');
+    var countEl = mount.querySelector('#vizCount');
+    var thumbs = mount.querySelectorAll('.th');
+    var n = ORDER.length;
+
+    function schedule(){
+      if(VIZ.timer){ clearTimeout(VIZ.timer); VIZ.timer=null; }
+      if(VIZ.reduce || VIZ.paused) return;
+      VIZ.timer = setTimeout(function(){ show(VIZ.pos+1, true); }, 6500);
+    }
+    function startProg(){
+      if(!prog) return;
+      prog.classList.remove('run'); void prog.offsetWidth;
+      if(!VIZ.reduce && !VIZ.paused) prog.classList.add('run');
+    }
+    function show(pos, animate){
+      VIZ.pos = ((pos % n) + n) % n;
+      var r = ROOMS[ORDER[VIZ.pos]];
+      var incoming = bgs[VIZ.topA ? 1 : 0], outgoing = bgs[VIZ.topA ? 0 : 1];
+      incoming.style.backgroundImage = "url('"+r.photo+"')";
+      incoming.classList.add('is-top'); outgoing.classList.remove('is-top');
+      if(animate && !VIZ.reduce){ incoming.style.animation='none'; void incoming.offsetWidth; incoming.style.animation=''; }
+      VIZ.topA = !VIZ.topA;
+      info.innerHTML = vizInfoHTML(r, lang);
+      tagEl.textContent = r.tag[lang];
+      countEl.innerHTML = num2(VIZ.pos)+'<span>/ '+num2(n-1)+'</span>';
+      thumbs.forEach(function(t){ t.classList.toggle('is-active', +t.dataset.pos===VIZ.pos); });
+      startProg();
+      schedule();
+    }
+    function pause(){ VIZ.paused=true; stage.classList.add('is-paused'); if(VIZ.timer){ clearTimeout(VIZ.timer); VIZ.timer=null; } }
+    function resume(){ VIZ.paused=false; stage.classList.remove('is-paused'); startProg(); schedule(); }
+
+    mount.querySelector('#vizPrev').addEventListener('click', function(){ show(VIZ.pos-1, true); });
+    mount.querySelector('#vizNext').addEventListener('click', function(){ show(VIZ.pos+1, true); });
+    thumbs.forEach(function(t){ t.addEventListener('click', function(){ show(+t.dataset.pos, true); }); });
+    stage.addEventListener('mouseenter', pause);
+    stage.addEventListener('mouseleave', resume);
+
+    VIZ.show = show; VIZ.pause = pause; VIZ.resume = resume;
+    if(!VIZ.bound){ VIZ.bound = true; document.addEventListener('keydown', vizKey); document.addEventListener('visibilitychange', vizVis); }
+
+    show(VIZ.pos, false);
+  }
+
+  var RENDERERS = { galerie:renderGalerie, editorial:renderEditorial, index:renderIndex, cine:renderViz };
 
   /* ---------- Logos messageries (repère visuel) --------------------- */
   var MAIL_ICON = {
