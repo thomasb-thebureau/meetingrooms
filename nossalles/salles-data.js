@@ -55,13 +55,11 @@
       presta:{fr:'Petit-déjeuner, collation, afterwork sur demande · déjeuner au restaurant privé The Café à partir de 33 € HT / pers.',
               en:'Breakfast, refreshments, afterwork on request · lunch at the private restaurant The Café from €33 excl. VAT / guest.'},
       desc:{fr:[
-        'Située au 28 Cours Albert 1ᵉʳ, dans le 8ᵉ arrondissement de Paris, The Board Room est une salle de réunion premium pensée pour les échanges confidentiels et les prises de décision stratégiques.',
-        'Installée dans un cadre élégant, cette salle entièrement équipée accueille jusqu’à 12 personnes. Elle convient particulièrement aux comités de direction, réunions d’actionnaires, rendez-vous clients ou sessions de travail avec des équipes internationales.',
-        'Son principal atout : un environnement soigné, bénéficiant d’une vue sur la Seine. La salle associe confort, confidentialité et équipement audiovisuel, dans l’une des adresses les plus prestigieuses de The Bureau.'],
+        'Pierre haussmannienne, lumière du jour, vue sur la Seine.',
+        'La salle du conseil, pour les échanges confidentiels et les décisions qui comptent — dans l’une des adresses les plus prestigieuses de The Bureau.'],
       en:[
-        'At 28 Cours Albert 1ᵉʳ, in the 8th arrondissement of Paris, The Board Room is a premium meeting room designed for confidential exchanges and strategic decision-making.',
-        'Set in an elegant space, this fully equipped room seats up to 12. It is particularly suited to board committees, shareholder meetings, client appointments or working sessions with international teams.',
-        'Its main asset: a refined setting with a view over the Seine. The room combines comfort, confidentiality and audiovisual equipment, at one of The Bureau’s most prestigious addresses.']} },
+        'Haussmannian stone, daylight, a view over the Seine.',
+        'The boardroom, for confidential exchanges and the decisions that matter — at one of The Bureau’s most prestigious addresses.']} },
 
     { id:'deal-8e-16', name:'The Deal Room', arr:'8e', photo:'photos/deal-room-8e-16.png',
       tag:{fr:'Réunion',en:'Meeting'},
@@ -72,13 +70,11 @@
       presta:{fr:'Petit-déjeuner, collation, afterwork sur demande · déjeuner au restaurant privé The Café à partir de 33 € HT / pers.',
               en:'Breakfast, refreshments, afterwork on request · lunch at the private restaurant The Café from €33 excl. VAT / guest.'},
       desc:{fr:[
-        'À l’étage du 16 Cours Albert 1ᵉʳ, The Deal Room offre un format plus intimiste, idéal pour les réunions en petit comité. Située à l’Alma, en bord de Seine et face à la Tour Eiffel, elle accueille jusqu’à 8 personnes dans un environnement élégant et équipé.',
-        'Cette salle de réunion convient aux rendez-vous confidentiels, aux réunions d’équipe resserrées, aux points stratégiques ou aux présentations nécessitant un cadre calme et qualitatif.',
-        'Sa décoration soignée, son matériel audiovisuel et sa vue sur la Seine en font un lieu particulièrement adapté aux moments professionnels où l’attention portée au cadre compte autant que la fonctionnalité.'],
+        'Un format intimiste, en bord de Seine, face à la Tour Eiffel.',
+        'Pour les rendez-vous confidentiels et les points stratégiques en petit comité — là où le cadre compte autant que la fonction.'],
       en:[
-        'On the upper floor of 16 Cours Albert 1ᵉʳ, The Deal Room offers a more intimate format, ideal for small-committee meetings. At Alma, by the Seine and facing the Eiffel Tower, it seats up to 8 in an elegant, equipped setting.',
-        'This meeting room suits confidential appointments, tight-knit team meetings, strategic check-ins or presentations that call for a calm, high-quality setting.',
-        'Its careful décor, audiovisual equipment and Seine view make it especially well suited to professional moments where the setting matters as much as functionality.']} },
+        'An intimate format, by the Seine, facing the Eiffel Tower.',
+        'For confidential meetings and strategic check-ins in a small committee — where the setting matters as much as the function.']} },
 
     { id:'cafe-8e-28', name:'The Café', arr:'8e', photo:'photos/cafe-8e-28.png',
       tag:{fr:'Restaurant privé',en:'Private restaurant'},
@@ -89,13 +85,11 @@
       price:null,
       presta:{fr:'Déjeuner, pause gourmande, cocktail ou privatisation en soirée.',en:'Lunch, gourmet break, cocktail or evening private hire.'},
       desc:{fr:[
-        'The Café est le restaurant privé du 28 Cours Albert 1ᵉʳ. Pensé comme un lieu de rencontres et d’échanges, il prolonge l’expérience The Bureau au-delà de la salle de réunion classique.',
-        'Cet espace peut accompagner vos événements professionnels, notamment pour un déjeuner, une pause gourmande, un cocktail ou une privatisation en soirée. The Café s’inscrit dans l’esprit The Bureau : un cadre élégant, convivial et épicurien, où la gastronomie occupe une place importante.',
-        'Il s’adresse aux entreprises qui souhaitent organiser un moment professionnel plus informel, recevoir des invités dans un cadre chaleureux ou associer réunion de travail et expérience de restauration.'],
+        'Le restaurant privé du 28 Cours Albert 1ᵉʳ.',
+        'Déjeuner, pause gourmande, cocktail ou privatisation en soirée : l’esprit The Bureau prolongé à table, dans un cadre convivial et épicurien.'],
       en:[
-        'The Café is the private restaurant of 28 Cours Albert 1ᵉʳ. Conceived as a place to meet and exchange, it extends the The Bureau experience beyond the traditional meeting room.',
-        'This space can accompany your professional events — a lunch, a gourmet break, a cocktail or an evening private hire. The Café embodies the The Bureau spirit: an elegant, convivial and epicurean setting where gastronomy plays a central role.',
-        'It is designed for companies wishing to host a more informal professional moment, to welcome guests in a warm setting, or to pair a working meeting with a dining experience.']} },
+        'The private restaurant of 28 Cours Albert 1ᵉʳ.',
+        'Lunch, a gourmet break, a cocktail or an evening private hire: the The Bureau spirit extended to the table — convivial and epicurean.']} },
 
     { id:'conference-8e-28', name:'The Conference Room', arr:'8e', photo:'photos/conference-8e-28.png',
       tag:{fr:'Conférence',en:'Conference'},
@@ -106,13 +100,11 @@
       presta:{fr:'Petit-déjeuner, collation, afterwork sur demande · déjeuner au restaurant privé The Café à partir de 33 € HT / pers.',
               en:'Breakfast, refreshments, afterwork on request · lunch at the private restaurant The Café from €33 excl. VAT / guest.'},
       desc:{fr:[
-        'Toujours au 28 Cours Albert 1ᵉʳ, The Conference Room est l’espace le plus adapté aux formats élargis dans le 8ᵉ arrondissement. Située au premier étage, cette salle de réunion entièrement équipée peut accueillir jusqu’à 30 personnes.',
-        'Elle répond aux besoins des entreprises qui souhaitent organiser une présentation, une réunion d’équipe élargie, une conférence, un atelier, une formation ou une journée d’étude. Son environnement bénéficie d’une ouverture sur terrasse, ce qui apporte un confort supplémentaire lors des temps de pause.',
-        'The Conference Room combine capacité, équipement audiovisuel et services sur mesure, dans un cadre premium à proximité de la Seine.'],
+        'Le grand format du 8ᵉ, au premier étage, ouvert sur terrasse.',
+        'Présentations, conférences, formations ou journées d’étude : le volume, l’équipement et les services, à deux pas de la Seine.'],
       en:[
-        'Still at 28 Cours Albert 1ᵉʳ, The Conference Room is the space best suited to larger formats in the 8th arrondissement. On the first floor, this fully equipped meeting room can host up to 30 guests.',
-        'It meets the needs of companies organising a presentation, a larger team meeting, a conference, a workshop, a training session or a study day. Its setting opens onto a terrace, adding extra comfort during breaks.',
-        'The Conference Room combines capacity, audiovisual equipment and tailored services, in a premium setting close to the Seine.']} },
+        'The large format of the 8th, on the first floor, opening onto a terrace.',
+        'Presentations, conferences, training or study days: the volume, the equipment and the services, steps from the Seine.']} },
 
     /* ----- Paris 2ᵉ ----- */
     { id:'board-2e-42', name:'The Board Room', arr:'2e', photo:'photos/board-room-2e-42.png',
@@ -124,13 +116,11 @@
       presta:{fr:'Petit-déjeuner, collation, afterwork sur demande · déjeuner au Floor à partir de 26 € HT / pers.',
               en:'Breakfast, refreshments, afterwork on request · lunch at Le Floor from €26 excl. VAT / guest.'},
       desc:{fr:[
-        'Dans le 2ᵉ arrondissement de Paris, The Bureau propose une Board Room située au 42 rue Notre-Dame des Victoires, face au Palais Brongniart.',
-        'Cet espace entièrement équipé se trouve au rez-de-chaussée du bâtiment et bénéficie d’un accès direct par le patio. Il offre un cadre confidentiel et soigné, propice aux réunions de direction, aux échanges stratégiques ou à l’accueil d’équipes internationales.',
-        'La salle peut accueillir jusqu’à 12 personnes. Son atmosphère calme et son design maîtrisé en font une adresse idéale pour louer une salle de réunion à Paris dans un quartier central, entre Opéra, Bourse et les grands pôles d’affaires du 2ᵉ arrondissement.'],
+        'Face au Palais Brongniart, en rez-de-chaussée, accès direct par le patio.',
+        'Une salle de direction confidentielle au cœur du 2ᵉ, entre Opéra et Bourse.'],
       en:[
-        'In the 2nd arrondissement of Paris, The Bureau offers a Board Room at 42 rue Notre-Dame des Victoires, facing the Palais Brongniart.',
-        'This fully equipped space sits on the ground floor of the building, with direct access via the patio. It provides a confidential, refined setting, well suited to board meetings, strategic exchanges or hosting international teams.',
-        'The room seats up to 12. Its calm atmosphere and considered design make it an ideal address to rent a meeting room in Paris in a central district, between Opéra, Bourse and the major business hubs of the 2nd arrondissement.']} },
+        'Facing the Palais Brongniart, on the ground floor, with direct patio access.',
+        'A confidential boardroom in the heart of the 2nd, between Opéra and Bourse.']} },
 
     { id:'deal-2e-25', name:'The Deal Room', arr:'2e', photo:'photos/deal-room-2e-25.png',
       tag:{fr:'Réunion',en:'Meeting'},
@@ -141,13 +131,11 @@
       presta:{fr:'Petit-déjeuner, collation, afterwork sur demande · déjeuner au restaurant privé The Comptoir à partir de 33 € HT / pers.',
               en:'Breakfast, refreshments, afterwork on request · lunch at the private restaurant The Comptoir from €33 excl. VAT / guest.'},
       desc:{fr:[
-        'Située au 25 rue du 4 Septembre, The Deal Room du 2ᵉ arrondissement se distingue par son décor haussmannien et sa lumière naturelle. Installée au deuxième étage du bâtiment, elle constitue un espace chaleureux et structuré pour les réunions de travail exigeantes.',
-        'La salle accueille jusqu’à 8 personnes. Elle est aménagée autour de trois zones : un petit salon, une grande table de réunion et des bureaux en îlots. Cette configuration permet d’alterner les temps de présentation, d’échange et de travail collaboratif.',
-        'The Deal Room est particulièrement adaptée aux réunions de comité restreint, aux séances de travail confidentielles, aux rendez-vous clients ou aux ateliers nécessitant un cadre élégant et flexible.'],
+        'Décor haussmannien et lumière naturelle, au deuxième étage.',
+        'Trois zones — petit salon, grande table, bureaux en îlots — pour alterner présentation, échange et travail en petit comité.'],
       en:[
-        'At 25 rue du 4 Septembre, the 2nd-arrondissement Deal Room stands out for its Haussmannian décor and natural light. On the second floor of the building, it is a warm, structured space for demanding working meetings.',
-        'The room seats up to 8. It is arranged around three zones: a small lounge, a large meeting table and cluster desks. This layout makes it easy to move between presentation, discussion and collaborative work.',
-        'The Deal Room is especially suited to small-committee meetings, confidential working sessions, client appointments or workshops that call for an elegant, flexible setting.']} },
+        'Haussmannian décor and natural light, on the second floor.',
+        'Three zones — a lounge, a large table, cluster desks — to move between presentation, discussion and small-group work.']} },
 
     { id:'board-2e-25', name:'The Board Room', arr:'2e', photo:'photos/board-room-2e-25.png',
       tag:{fr:'Conseil',en:'Board'},
@@ -158,13 +146,11 @@
       presta:{fr:'Petit-déjeuner, collation, afterwork sur demande · déjeuner au restaurant privé The Comptoir à partir de 33 € HT / pers.',
               en:'Breakfast, refreshments, afterwork on request · lunch at the private restaurant The Comptoir from €33 excl. VAT / guest.'},
       desc:{fr:[
-        'Également située au 25 rue du 4 Septembre, cette Board Room accueille jusqu’à 12 personnes dans un espace entièrement équipé, situé au rez-de-chaussée du bâtiment.',
-        'Elle convient parfaitement aux réunions de direction, aux rendez-vous professionnels, aux réunions d’actionnaires ou aux sessions de travail avec des équipes internes ou externes. Son design soigné et son emplacement central en font une solution pertinente pour louer une salle de réunion premium à Paris, dans un quartier vivant et stratégique.',
-        'L’adresse se situe entre Opéra et Bourse, dans un secteur recherché du 2ᵉ arrondissement, facilement identifiable pour des invités venant de Paris, d’Île-de-France ou de plus loin.'],
+        'En rez-de-chaussée, au cœur du quartier Opéra-Bourse.',
+        'Une salle de direction au design soigné, à une adresse vivante et facile d’accès pour vos invités.'],
       en:[
-        'Also at 25 rue du 4 Septembre, this Board Room seats up to 12 in a fully equipped space on the ground floor of the building.',
-        'It is perfectly suited to board meetings, business appointments, shareholder meetings or working sessions with internal or external teams. Its refined design and central location make it a strong option to rent a premium meeting room in Paris, in a lively, strategic district.',
-        'The address sits between Opéra and Bourse, in a sought-after part of the 2nd arrondissement, easy to find for guests coming from Paris, the Île-de-France region or further afield.']} },
+        'On the ground floor, at the heart of the Opéra-Bourse district.',
+        'A boardroom of considered design, at a lively address that’s easy for your guests to reach.']} },
 
     { id:'floor-2e-42', name:'Le Floor', arr:'2e', photo:'photos/floor-2e-42.png',
       tag:{fr:'Coffee shop',en:'Coffee shop'},
@@ -175,13 +161,11 @@
       price:null,
       presta:{fr:'Carte coffee shop & bakery le midi · pauses, déjeuners et privatisations selon disponibilité.',en:'Coffee shop & bakery menu at midday · breaks, lunches and private hire subject to availability.'},
       desc:{fr:[
-        'Le Floor est situé au 42 rue Notre-Dame des Victoires, dans le 2ᵉ arrondissement de Paris. Cet espace complète l’offre de réunion et d’événements The Bureau avec une atmosphère plus ouverte, conviviale et adaptée aux moments professionnels informels.',
-        'Le Floor est présenté comme un coffee shop le matin, avec une carte de restauration coffee shop & bakery pour le déjeuner. Il peut également être envisagé pour des formats événementiels, notamment des temps de convivialité, des pauses, des déjeuners ou des privatisations selon disponibilité.',
-        'C’est un lieu pertinent pour prolonger une réunion, organiser un moment d’échange ou accueillir un événement professionnel dans un cadre moins conventionnel qu’une salle de réunion classique.'],
+        'Coffee shop le matin, carte coffee shop & bakery au déjeuner.',
+        'Un cadre ouvert et convivial pour prolonger une réunion, une pause ou un événement — autrement.'],
       en:[
-        'Le Floor is at 42 rue Notre-Dame des Victoires, in the 2nd arrondissement of Paris. This space rounds out The Bureau’s meeting and events offer with a more open, convivial atmosphere suited to informal professional moments.',
-        'Le Floor works as a coffee shop in the morning, with a coffee shop & bakery menu at lunch. It can also be considered for event formats — convivial gatherings, breaks, lunches or private hire, subject to availability.',
-        'It is a fitting place to extend a meeting, host a moment of exchange or hold a professional event in a less conventional setting than a traditional meeting room.']} }
+        'A coffee shop in the morning, a coffee shop & bakery menu at lunch.',
+        'An open, convivial setting to extend a meeting, a break or an event — differently.']} }
   ];
 
   /* ---------- i18n strings ------------------------------------------- */
