@@ -266,11 +266,45 @@ body[data-lang="en"] [lang="fr"]{ display:none !important; }
   border-bottom:1px solid currentColor; padding-bottom:3px; transition:color .25s; }
 .btn-line:hover{ color:var(--ink); }
 
+/* ---------- Editorial prose sections -------------------------------- */
+.prose{ max-width:var(--maxw); margin:0 auto; padding:clamp(44px,5.5vw,76px) var(--pad); }
+.prose--rule{ border-top:0.5px solid var(--rule); }
+.prose__inner{ max-width:760px; }
+.prose .eyelet{ margin-bottom:14px; }
+.prose__title{ font-family:var(--font-display); font-weight:700; font-size:clamp(25px,3vw,38px);
+  letter-spacing:-0.02em; line-height:1.1; margin:0 0 22px; }
+.prose__body{ display:flex; flex-direction:column; gap:17px; }
+.prose__body p{ font-family:var(--font-body); font-weight:300; font-size:clamp(16px,1.45vw,18px);
+  line-height:1.8; color:rgba(15,15,15,0.78); }
+
+/* ---------- Guide (quelle salle) ------------------------------------ */
+.guide{ max-width:var(--maxw); margin:0 auto; padding:clamp(40px,5vw,72px) var(--pad);
+  border-top:0.5px solid var(--rule); }
+.guide .eyelet{ margin-bottom:14px; }
+.guide__lead{ font-family:var(--font-body); font-style:italic; font-weight:300;
+  font-size:clamp(17px,1.6vw,20px); line-height:1.7; color:rgba(15,15,15,0.7); max-width:60ch; }
+.guide__list{ margin-top:34px; border-top:0.5px solid var(--rule); }
+.guide__item{ display:grid; grid-template-columns:minmax(190px,250px) 1fr; gap:18px clamp(28px,4vw,60px);
+  padding:24px 0; border-bottom:0.5px solid var(--rule); align-items:baseline; }
+.guide__k{ font-family:var(--font-display); font-weight:700; font-size:17px; letter-spacing:-0.01em; color:var(--ink); }
+.guide__k small{ display:block; font-family:var(--font-display); font-weight:600; font-size:10px;
+  letter-spacing:0.16em; text-transform:uppercase; color:var(--gold-aa); margin-top:7px; }
+.guide__v{ font-family:var(--font-body); font-weight:300; font-size:16.5px; line-height:1.72; color:rgba(15,15,15,0.78); }
+@media(max-width:680px){ .guide__item{ grid-template-columns:1fr; gap:8px; } }
+
+/* multi-paragraph room descriptions */
+.idx-info__desc p, .erow__desc p{ margin:0 0 13px; }
+.idx-info__desc p:last-child, .erow__desc p:last-child{ margin-bottom:0; }
+
 /* ---------- Slate band ---------------------------------------------- */
 .slate{ background:var(--slate); color:var(--ivory); }
 .slate__inner{ max-width:var(--maxw); margin:0 auto; padding:clamp(56px,7vw,88px) var(--pad);
   display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(28px,4vw,56px); }
-.slate__head{ grid-column:1/-1; display:flex; flex-direction:column; gap:14px; margin-bottom:6px; }
+.slate__head{ grid-column:1/-1; display:flex; flex-direction:column; gap:14px; margin-bottom:30px; }
+.slate__title{ font-family:var(--font-display); font-weight:700; font-size:clamp(22px,2.6vw,32px);
+  letter-spacing:-0.01em; line-height:1.14; color:var(--white); margin:6px 0 2px; max-width:26ch; }
+.slate__lead{ font-family:var(--font-body); font-weight:300; font-size:15.5px; line-height:1.75;
+  color:rgba(245,239,229,0.8); max-width:66ch; }
 .slate__col h3{ font-family:var(--font-display); font-weight:600; font-size:21px;
   letter-spacing:-0.005em; color:var(--white); margin-bottom:10px; }
 .slate__col .num{ font-family:var(--font-body); font-size:30px; color:var(--gold-lt); margin-bottom:14px; }
