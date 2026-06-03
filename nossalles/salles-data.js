@@ -331,6 +331,7 @@
       mount.querySelector('#idxEquip').innerHTML = equipHTML(r,lang);
       mount.querySelector('#idxMeta').innerHTML = metaHTML(r,lang);
       mount.querySelector('#idxCta').setAttribute('href', quoteLink(r,lang));
+      try{ mount.dispatchEvent(new CustomEvent('tb:select',{detail:{idx:idx}})); }catch(e){}
     }
     items.forEach(function(el){
       el.addEventListener('mouseenter', function(){ select(+el.dataset.i); });
@@ -362,6 +363,8 @@
 
   var io;
   function observeReveal(){
+    /* Si GSAP est présent, c'est lui qui anime les .reveal (voir salles-anim.js). */
+    if(window.gsap) return;
     if(!('IntersectionObserver' in window)) {
       document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-in'); });
       return;
