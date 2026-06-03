@@ -369,8 +369,9 @@
       mount.querySelector('#idxCta').setAttribute('href', quoteLink(r,lang));
       try{ mount.dispatchEvent(new CustomEvent('tb:select',{detail:{idx:idx}})); }catch(e){}
     }
+    /* Sélection au clic uniquement : le panneau de droite reste verrouillé
+       sur la salle choisie — aucun changement au survol. */
     items.forEach(function(el){
-      el.addEventListener('mouseenter', function(){ select(+el.dataset.i); });
       el.addEventListener('click', function(){ select(+el.dataset.i); });
     });
   }
