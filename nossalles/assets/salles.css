@@ -417,9 +417,10 @@ select.rfield__in option{ background:var(--ink); color:var(--white); }
 @media(max-width:680px){ .rform__grid{ grid-template-columns:1fr 1fr; } }
 @media(max-width:460px){ .rform__grid{ grid-template-columns:1fr; } }
 
-/* ---------- Sections plein écran (chaque bloc = un écran) ----------- */
-.rooms, .lieu, .slate, .guide, .contact{
-  min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
+/* ---------- Plein écran : hero + index uniquement ------------------- */
+/* (le hero a déjà son propre min-height:100vh) */
+.rooms{ min-height:100vh; display:flex; flex-direction:column; justify-content:center; }
+/* Les autres sections respirent à leur hauteur naturelle (cf. leurs paddings). */
 
 /* ---------- Footer — reproduction exacte (thebureauparis.webflow.io) - */
 .tb-footer-1{background-color:#09080c;border-top:1px solid #ffffff14;padding:32px 56px 24px}
